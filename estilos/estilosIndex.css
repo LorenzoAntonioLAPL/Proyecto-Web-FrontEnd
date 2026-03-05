@@ -1,0 +1,38 @@
+.tarjetaTitulo {
+    position: relative;
+    display: inline-block;
+}
+
+/* Capa brillante detrás */
+.tarjetaTitulo::before {
+    content: "";
+    position: absolute;
+    inset: -3px; 
+    border-radius: 20px;
+    background: linear-gradient(
+        45deg,
+        #ff0055, /* Rosa intenso */
+        #facc15, /* Amarillo brillante */
+        #3b82f6, /* Azul festivo */
+        #22c55e, /* Verde lima */
+        #ff0055
+    );
+    background-size: 300% 300%;
+    animation: brillo 6s linear infinite;
+    z-index: 0;
+}
+
+/* Tarjeta encima */
+.tarjetaTitulo .card {
+    position: relative;
+    z-index: 1;
+    border: none;
+    border-radius: 20px;
+}
+
+/* Animación */
+@keyframes brillo {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}

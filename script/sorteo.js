@@ -70,13 +70,35 @@ function realizarSorteo() {
     }
 
     const divResultado = document.getElementById("resultado");
-    divResultado.innerHTML = "<h4>Resultados:</h4>";
+    divResultado.innerHTML = `
+        <h4 class="mb-3 text-center">Resultados del Sorteo :)</h4>
+        <div class="row g-3" id="gridResultados"></div>
+    `;
+
+    const grid = document.getElementById("gridResultados");
 
     for (let i = 0; i < participantes.length; i++) {
-        divResultado.innerHTML += `
-        <div class="alert alert-info">
-            ${participantes[i]} → ${resultado[i]}
-        </div>
-        `;
+        // asi nomas inserto un card de bootstrap pero con los datos del sorteo
+        setTimeout(() => {
+            grid.innerHTML += `
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card shadow resultado-card text-center h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">${participantes[i]}</h5>
+                        <p class="card-text">le regala a</p>
+                        <h4 class="text-primary">${resultado[i]}</h4>
+                    </div>
+                </div>
+            </div>
+            `;
+
+        }, i * 200); //para que se vea escalonado tipo hacer que aparezcan lentito una tras otra porque agarra el 200 mas que el anterior
+        confetti({
+            particleCount: 250,
+            spread: 360, // Dispersión reducida para un efecto de lluvia
+            origin: { y: -.5 }, // Lanza desde la parte superior de la pantalla
+            colors: ['#ff0055', '#facc15', '#3b82f6', '#22c55e']
+        });
     }
+    
 }

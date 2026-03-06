@@ -91,9 +91,28 @@
 
                         <div class="row">
 
+                            <!-- Selector del tipo de celebración.
+                            Si el usuario elige "Otro", se habilita un campo
+                            para escribir el nombre de la celebración. -->
+
                             <div class="col-md-4 mb-3">
-                                <label class="form-label">Nombre celebración</label>
-                                <input type="text" id="celebracion" class="form-control">
+                                <label class="form-label">Tipo de celebración</label>
+
+                                <select id="tipoCelebracion" class="form-select">
+                                    <option value="">Seleccionar...</option>
+                                    <option value="Navidad">Navidad</option>
+                                    <option value="Cumpleaños">Cumpleaños</option>
+                                    <option value="Año Nuevo">Año Nuevo</option>
+                                    <option value="Amigos">Intercambio entre amigos</option>
+                                    <option value="Otro">Otro...</option>
+                                </select>
+
+                                <!-- Campo oculto que aparece si se selecciona "Otro" -->
+                                <input 
+                                    type="text" 
+                                    id="celebracion" 
+                                    class="form-control mt-2 d-none" 
+                                    placeholder="Escribe el nombre de la celebración">
                             </div>
 
                             <div class="col-md-4 mb-3">

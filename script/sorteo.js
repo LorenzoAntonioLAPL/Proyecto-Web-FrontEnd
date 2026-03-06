@@ -102,3 +102,30 @@ function realizarSorteo() {
     }
     
 }
+
+const divExclusiones = document.getElementById("exclusionesEvento");
+
+if (datos.exclusiones && datos.exclusiones.length > 0) {
+
+    // pongo la lista para que se vea mas bonito
+    let html = `<h5 class="mb-3">Exclusiones</h5><ul class="list-group">`;
+    // para ir agregando el html de uno por uno sin borrar el contenido anterior
+    datos.exclusiones.forEach(ex => {
+        html += `
+        <li class="list-group-item">
+            <strong>${ex.persona}</strong> no puede regalar a: 
+            ${ex.noPuedeCon.join(", ")}
+        </li>
+        `;
+    });
+    html += "</ul>";
+
+    divExclusiones.innerHTML = html;
+
+} else {
+
+    divExclusiones.innerHTML = `
+        <h5 class="mb-3">Exclusiones</h5>
+        <p class="text-muted">No hay exclusiones definidas.</p>
+    `;
+}

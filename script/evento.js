@@ -3,6 +3,10 @@ let exclusiones = [];
 // Para lo de las exclusiones tener info de quien anda en el espacio y actualizar los datos
 let participanteActual = null;
 
+// Para agregar lo de que aparezca un input bien al seleccionar otro en tipo de celebracion
+const selector = document.getElementById("tipoCelebracion");
+const inputCelebracion = document.getElementById("celebracion");
+
 
 // obtener todos los participantes incluyendo organizador si participa
 function obtenerTodosParticipantes() {
@@ -22,19 +26,26 @@ function obtenerTodosParticipantes() {
     return lista;
 }
 
-
-// agregar participante
 function agregarParticipante() {
 
     const input = document.getElementById("nuevoParticipante");
     const nombre = input.value.trim();
 
-    //simplemetne si esta vacio no agrega
+    // si esta vacío no agrega
     if (nombre === "") return;
+
+    // obtener todos los participantes actuales
+    const todos = obtenerTodosParticipantes();
+
+    // verificar si el nombre ya existe
+    if (todos.includes(nombre)) {
+        mostrarAlerta("Ese participante ya fue agregado", "warning");
+        return;
+    }
 
     participantes.push(nombre);
 
-    //limpia el valor del espacio donde se escribe
+    // limpiar input
     input.value = "";
 
     renderParticipantes();
@@ -238,6 +249,18 @@ function mostrarAlerta(mensaje, tipo = "danger") {
         alerta.innerHTML = "";
     }, 3000);
 }
+
+selector.addEventListener("change", () => {
+
+    if (selector.value === "Otro") {
+        inputCelebracion.classList.remove("d-none");
+    } else {
+        inputCelebracion.classList.add("d-none");
+        inputCelebracion.value = "";
+    }
+
+});
+
 
 // actualizar lista si cambia organizador o participa
 document.getElementById("participa").addEventListener("change", renderParticipantes);
